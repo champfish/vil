@@ -1,0 +1,13 @@
+{
+  "name": "vil",
+  "version": "0.0.1",
+  "license": "LICENSE",
+  "description": "Online village sim",
+  "dependencies": {
+    "express": "^4.16.0",
+    "socket.io": "^2.1.1"
+  },
+  "scripts": {
+    "start": "node index.js"
+  }
+}
