@@ -30,10 +30,10 @@ function updateGame() {
     var thisTime = Date.now();
     var deltaTime = (thisTime - lastTime) / 1000;
     lastTime = thisTime;
-    for (var i = 0; i < game.people.length; i++) {
-        game.people[i].doAction(game.people, game.things, staticData.actions);
-        game.people[i].update(deltaTime);
+    for (var i = 0; i < game.peopleKeys.length; i++) {
+    	var key = game.peopleKeys[i];
+        game.things[key].doAction(game.people, game.things, staticData.actions);
+        game.things[key].update(deltaTime);
     }
     update();
-
 }

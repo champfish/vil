@@ -1,5 +1,6 @@
 class thing {
-    constructor(x, y, name, spriteName) {
+    constructor(id, x, y, name, spriteName) {
+        this.id = id;
         this.x = x;
         console.log('this.x is ' + this.x);
         this.y = y;

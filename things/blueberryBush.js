@@ -1,8 +1,8 @@
 const thing = require('./thing');
 
 class blueberryBush extends thing {
-    constructor(x,y) {
-        super(x,y,"Blueberry Bush", 'blueberryBush');
+    constructor(id,x,y) {
+        super(id,x,y,"Blueberry Bush", 'blueberryBush');
     }
 
     fillActions(){

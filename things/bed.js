@@ -1,8 +1,8 @@
 const thing = require('./thing');
 
 class bed extends thing {
-    constructor(x,y) {
-        super(x,y,"bed",'bed');
+    constructor(id,x,y) {
+        super(id,x,y,"bed",'bed');
     }
 
     fillActions(){

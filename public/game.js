@@ -45,12 +45,10 @@ function draw() {
     leftCornerX = camX - canvas.width / 2;
     leftCornerY = camY - canvas.height / 2;
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    for (var i = 0; i < game.people.length; i++) {
-        var person = game.people[i];
-        drawSprite(person);
-    }
-    for (var i = 0; i < game.things.length; i++) {
-        var thing = game.things[i];
+
+    keys = Object.keys(game.things);
+    for (var i = 0; i < keys.length; i++) {
+        var thing = game.things[keys[i]];
         drawSprite(thing);
     }
 }

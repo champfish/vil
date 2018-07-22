@@ -24,19 +24,22 @@ class builder {
 
     getGame() {
         var game = {};
-        game.people = [];
-        var adam = new person(0, 0, "Adam");
-        game.people.push(adam);
+        game.things = {};
+        game.peopleKeys = [];
+        
+        var adam = new person(100,0, 0, "Adam");
+        game.things[adam.id]=adam;
+        game.peopleKeys.push(adam.id);
 
-        var jean = new person(50, 50, "Jean");
-        game.people.push(jean);
+        var jean = new person(101,50, 50, "Jean");
+        game.things[jean.id]=jean;
+        game.peopleKeys.push(jean.id);
 
-        game.things = [];
-        var bush = new blueberryBush(0, -150);
-        game.things.push(bush);
+        var bush = new blueberryBush(200,0, -150);
+        game.things[bush.id]=bush;
 
-        var bedi = new bed(50, 150);
-        game.things.push(bedi);
+        var bedi = new bed(201,50, 150);
+        game.things[bedi.id]=bedi;
 
         return game;
     }

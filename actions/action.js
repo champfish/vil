@@ -13,8 +13,6 @@ class action {
     // a does this action to b
     do(a, b) {
         if (a.dist(b) < 50) {
-            a.targetX = false;
-            a.targetY = false;
             if (!a.taskStarted) {
                 a.startTask();
             }

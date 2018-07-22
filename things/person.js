@@ -1,8 +1,8 @@
 const thing = require('./thing');
 
 class person extends thing {
-    constructor(x, y, name) {
-        super(x, y, name, 'adam');
+    constructor(id, x, y, name) {
+        super(id, x, y, name, 'adam');
         this.targetX = false;
         this.targetY = false;
         this.speed = 10;
@@ -19,6 +19,8 @@ class person extends thing {
 
         this.currentAction = false;
         this.currentDesire = 0;
+
+        this.isPerson = true;
     }
 
     fillActions() {
@@ -26,29 +28,28 @@ class person extends thing {
         this.selfActions.push('wander');
     }
 
-    doAction(people, things, actions) {
+    // selects the most desireable action and then does it
+    doAction(peopleKeys, things, actions) {
         if (this.currentAction !== false) {
-            this.currentDesire = this.currentAction.getDesire(this, this.currentDesireThing); // update desire to do current action
+            this.currentDesire = this.currentAction.getDesire(this, things[this.currentDesireThing]); // update desire to do current action
         }
         var bestDesire = 0;
         var bestAction;
         var bestDesireThing;
-        for (var i = 0; i < things.length; i++) {
-            var actionNames = things[i].actions;
+
+        var keys = Object.keys(things);
+        for (var i = 0; i < keys.length; i++) {
+            var actionNames = things[keys[i]].actions;
             for (var n = 0; n < actionNames.length; n++) {
                 // get the desire of this to do actionName[n] towards thing[i]
                 var action = actions.get(actionNames[n]);
-                var desire = action.getDesire(this, things[i]);
+                var desire = action.getDesire(this, things[keys[i]]);
                 if (desire > bestDesire) {
                     bestDesire = desire;
                     bestAction = actions.get(actionNames[n]);
-                    bestDesireThing = things[i];
+                    bestDesireThing = keys[i];
                 }
             }
-        }
-
-        for (var i = 0; i < people.length; i++) {
-            var person = people[i];
         }
 
         for (var i = 0; i < this.selfActions.length; i++) {
@@ -69,8 +70,11 @@ class person extends thing {
             this.currentDesire = bestDesire;
             this.currentDesireThing = bestDesireThing;
         } else if (this.currentAction != false) {
-            var complete = this.currentAction.do(this, this.currentDesireThing);
+            var complete = this.currentAction.do(this, things[this.currentDesireThing]);
             if (complete) {
+                if (this.currentAction.isJointAction) {
+                    game.things[this.currentDesireThing].resetAction(); // resets joint action person too
+                }
                 this.resetAction();
             }
         }
